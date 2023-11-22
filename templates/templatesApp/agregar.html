@@ -40,11 +40,7 @@
                 {% for reserva in reservas %}
                 <tr>
                     <td>{{reserva.nombre}}</td>
-                    <td>    
-                        {% with hoy=datetime.now.date fchNacimiento=reserva.fchNacimiento %}
-                        {{ hoy.year - fchNacimiento.year - (hoy.month, hoy.day) < (fchNacimiento.month, fchNacimiento.day) }}
-                        {% endwith %}
-                    </td>
+                    <td>{{reserva.edad}}</td>
                     <td>{{reserva.telefono}}</td>
                     <td>{{reserva.fechareserva}}</td>
                     <td>{{reserva.fchCreacion}}</td>
@@ -60,7 +56,7 @@
                             <i class="bi bi-trash-fill"></i>
                         </a>
                         <a href="../detallePDF/{{reserva.idSolicitud}}" class="btn btn-info btn-small">
-                            <i class="bi bi-trash-fill"></i>
+                            <i class="bi bi-arrow-down-circle-fill">&nbspPDF</i>
                         </a>
                     </td>
                 </tr>

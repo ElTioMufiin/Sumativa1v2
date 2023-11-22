@@ -43,3 +43,10 @@ class Reserva(models.Model):
     fchCreacion = models.DateTimeField(auto_now_add=True)
     fchModificacion = models.DateTimeField(auto_now=True)
     
+    def edad(self):
+        hoy = datetime.datetime.now().date()
+        nac = self.fchNacimiento
+        edad = hoy.year - nac.year - ((hoy.month, hoy.day) < (nac.month, nac.day))
+        return int(edad)
+    
+    

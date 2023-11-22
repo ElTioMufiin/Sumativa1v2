@@ -23,4 +23,5 @@ urlpatterns = [
     path('eliminarReserva/<int:id>',views.eliminarReserva),
     path('actualizarReserva/<int:id>',views.actualizarReserva),
     path('admin/', admin.site.urls),
+    path('detallePDF/<int:id>', views.crearPDF),
 ]

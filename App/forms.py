@@ -36,15 +36,6 @@ class reservaForm(forms.ModelForm):
         input_formats=['%Y-%m-%d'],
         label='Fecha Nacimiento'
     )
-    
-    def clean_edad(self):
-        fchNacimiento = self.cleaned_data.get('fchNacimiento')
-        hoy = datetime.now().date
-        edad = fchNacimiento.year - ((hoy.month, hoy.day) < (fchNacimiento.month, fchNacimiento.day))
-        if edad < 18:
-            raise forms.ValidationError("Debe ser mayor de edad para reservar.")
-        return edad
-    
     def clean_nombre(self):
         nombre = self.cleaned_data.get('nombre')
         if len(nombre) <= 2:
