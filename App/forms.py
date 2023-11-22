@@ -1,4 +1,5 @@
 from django import forms
+import datetime
 from .models import Reserva,estadoReserva,tipoReserva
 
 class reservaForm(forms.ModelForm):
@@ -19,7 +20,7 @@ class reservaForm(forms.ModelForm):
     )
     horareserva = forms.TimeField(widget=forms.widgets.TimeInput(attrs={'type':'time','format':'%H:%M'}),label='Hora Reserva')
     observaciones = forms.CharField(widget=forms.widgets.Textarea(attrs={'rows':4,'cols':50}))
-    cantidadpersonas = forms.IntegerField(label='Cantidad de Personas')
+    cantidadHermanos = forms.IntegerField(label='Cantidad de Hermanos')
     
     estadoReservaId = forms.ModelChoiceField(queryset=estadoReserva.objects.all(),label="Estado Reserva")
     estadoReservaId.widget.attrs['class'] = 'form-select'
@@ -27,8 +28,19 @@ class reservaForm(forms.ModelForm):
     tipoSolicitudId = forms.ModelChoiceField(queryset=tipoReserva.objects.all(),label='Tipo Reserva')
     tipoSolicitudId.widget.attrs['class'] = 'form-select'
     
+    imagenCarnet = forms.ImageField(widget=forms.ClearableFileInput,label="Foto Carnet")
+    imagenCarnet.widget.attrs['class'] = 'custom-file-input'
+    
+    fchNacimiento = forms.DateField(
+        widget=forms.widgets.DateInput(attrs={'type': 'date', 'format': 'yyyy-mm-dd'}),
+        input_formats=['%Y-%m-%d'],
+        label='Fecha Nacimiento'
+    )
+    
     def clean_edad(self):
-        edad = self.cleaned_data.get('edad')
+        fchNacimiento = self.cleaned_data.get('fchNacimiento')
+        hoy = datetime.now().date
+        edad = fchNacimiento.year - ((hoy.month, hoy.day) < (fchNacimiento.month, fchNacimiento.day))
         if edad < 18:
             raise forms.ValidationError("Debe ser mayor de edad para reservar.")
         return edad

@@ -6,12 +6,12 @@ from .forms import reservaForm
 # Create your views here.
 def agregarReserva(request):
     form = reservaForm()
+    Edad = ''
     if request.method == 'POST':
-        form = reservaForm(request.POST)
+        form = reservaForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
             form = reservaForm()
-    
     reservas = Reserva.objects.all()
     data = {'form':form,'reservas':reservas}
     return render(request,'templatesApp/agregar.html',data)

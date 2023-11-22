@@ -11,7 +11,7 @@
 <body class="container mt-5">
     <div class="alert alert-info display-4 text-center">Administracion de Reservas</div>
     <!--Formularios-->
-    <form method="POST">
+    <form method="POST" enctype="multipart/form-data">
         <table class="table">
             {{form}}
             {% csrf_token %}
@@ -26,8 +26,10 @@
             <thead>
                 <tr>
                     <th>Nombre</th>
+                    <th>Edad</th>
                     <th>Telefono</th>
                     <th>Fecha Reserva</th>
+                    <th>Fecha Solicitud</th>
                     <th>Hora Reserva</th>
                     <th>Website</th>
                     <th>Email</th>
@@ -38,8 +40,14 @@
                 {% for reserva in reservas %}
                 <tr>
                     <td>{{reserva.nombre}}</td>
+                    <td>    
+                        {% with hoy=datetime.now.date fchNacimiento=reserva.fchNacimiento %}
+                        {{ hoy.year - fchNacimiento.year - (hoy.month, hoy.day) < (fchNacimiento.month, fchNacimiento.day) }}
+                        {% endwith %}
+                    </td>
                     <td>{{reserva.telefono}}</td>
                     <td>{{reserva.fechareserva}}</td>
+                    <td>{{reserva.fchCreacion}}</td>
                     <td>{{reserva.horareserva}}</td>
                     <td>{{reserva.website}}</td>
                     <td>{{reserva.estadoReservaId}}</td>
@@ -49,6 +57,9 @@
                             <i class="bi bi-pencil-fill"></i>
                         </a>
                         <a href="../eliminarReserva/{{reserva.idSolicitud}}" class="btn btn-danger btn-small">
+                            <i class="bi bi-trash-fill"></i>
+                        </a>
+                        <a href="../detallePDF/{{reserva.idSolicitud}}" class="btn btn-info btn-small">
                             <i class="bi bi-trash-fill"></i>
                         </a>
                     </td>

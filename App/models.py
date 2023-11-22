@@ -1,5 +1,6 @@
-
+from collections.abc import Iterable
 from django.db import models
+import datetime
 
 # Create your models here.
 class estadoReserva(models.Model):
@@ -26,15 +27,19 @@ class Reserva(models.Model):
     telefono = models.CharField(max_length=12)
     fechareserva = models.DateField()
     horareserva = models.TimeField()
-    cantidadpersonas = models.IntegerField()
+    cantidadHermanos = models.IntegerField()
     
     observaciones = models.CharField(max_length=5000)
     
     website = models.URLField()
     email = models.EmailField()
     donate = models.BooleanField()
-    edad = models.IntegerField()
+    fchNacimiento = models.DateField()
     
     estadoReservaId = models.ForeignKey(estadoReserva,null=True,blank=False,on_delete=models.RESTRICT)
     tipoSolicitudId = models.ForeignKey(tipoReserva,null=True,blank=False,on_delete=models.RESTRICT)
-        
+    
+    imagenCarnet = models.ImageField(upload_to="carnets/")
+    fchCreacion = models.DateTimeField(auto_now_add=True)
+    fchModificacion = models.DateTimeField(auto_now=True)
+    
