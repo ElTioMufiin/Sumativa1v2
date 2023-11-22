@@ -42,6 +42,7 @@ class Reserva(models.Model):
     imagenCarnet = models.ImageField(upload_to="carnets/")
     fchCreacion = models.DateTimeField(auto_now_add=True)
     fchModificacion = models.DateTimeField(auto_now=True)
+    # codigoQr = models.ImageField(upload_to='codigoqr/')
     
     def edad(self):
         hoy = datetime.datetime.now().date()

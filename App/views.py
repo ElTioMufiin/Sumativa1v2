@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect
-
+#PDF
 from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import letter
 from reportlab.platypus import Table
@@ -7,6 +7,11 @@ from reportlab.lib import colors
 from reportlab.lib.utils import ImageReader
 from django.http import FileResponse
 import io
+#PDF
+#QR
+import qrcode
+from django.http import HttpResponse
+#QR
 
 from .models import Reserva
 from .forms import reservaForm
@@ -84,4 +89,3 @@ def crearPDF(request,id):
     response = FileResponse(buffer,as_attachment=False,filename=f'media/pdf/{reserva.idSolicitud}.pdf',content_type='application/pdf')
     
     return response
-    
