@@ -32,8 +32,9 @@
                     <th>Fecha Solicitud</th>
                     <th>Hora Reserva</th>
                     <th>Website</th>
+                    <th>Estado</th>
                     <th>Email</th>
-                    <th>---</th>
+                    <th class='text-center'>------</th>
                 </tr>
             </thead>
             <tbody>
@@ -48,15 +49,21 @@
                     <td>{{reserva.website}}</td>
                     <td>{{reserva.estadoReservaId}}</td>
                     <td>{{reserva.email}}</td>
-                    <td>
-                        <a href="../actualizarReserva/{{reserva.idSolicitud}}" class="btn btn-success btn-small">
+                    <td class="container">
+                        <a href="../actualizarReserva/{{reserva.idSolicitud}}" class="btn btn-warning btn-small">
                             <i class="bi bi-pencil-fill"></i>
                         </a>
                         <a href="../eliminarReserva/{{reserva.idSolicitud}}" class="btn btn-danger btn-small">
                             <i class="bi bi-trash-fill"></i>
                         </a>
-                        <a href="../detallePDF/{{reserva.idSolicitud}}" class="btn btn-info btn-small">
-                            <i class="bi bi-arrow-down-circle-fill">&nbspPDF</i>
+                        <a href="../detallePDF/{{reserva.idSolicitud}}" class="btn btn-success btn-small">
+                            <i class="bi bi-file-earmark-pdf-fill">&nbspPDF</i>
+                        </a>
+                        <a href="../pdfqr/{{reserva.idSolicitud}}" class="btn btn-info btn-small">
+                            <i class="bi bi-qr-code">&nbspPDF + QR</i>
+                        </a>
+                        <a href="../mostrarqr/{{reserva.idSolicitud}}" class="btn btn-secondary btn-small">
+                            <i class="bi bi-qr-code-scan">&nbspQR</i>
                         </a>
                     </td>
                 </tr>

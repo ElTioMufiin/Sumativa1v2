@@ -24,4 +24,6 @@ urlpatterns = [
     path('actualizarReserva/<int:id>',views.actualizarReserva),
     path('admin/', admin.site.urls),
     path('detallePDF/<int:id>', views.crearPDF),
+    path('pdfqr/<int:id>', views.generarPDFQR),
+    path('mostrarqr/<int:id>', views.mostrarQR),
 ]

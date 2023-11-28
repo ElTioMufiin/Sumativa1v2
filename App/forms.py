@@ -1,11 +1,24 @@
 from django import forms
-import datetime
 from .models import Reserva,estadoReserva,tipoReserva
+
 
 class reservaForm(forms.ModelForm):
     class Meta:
         model = Reserva
-        fields = '__all__'
+        fields = ['nombre',
+                'fchNacimiento',
+                'email',
+                'telefono',
+                'fechareserva',
+                'horareserva',
+                'cantidadHermanos',
+                'website',                
+                'donate',
+                'estadoReservaId',
+                'tipoSolicitudId',
+                'imagenCarnet',
+                'observaciones',
+                ]
     
     ESTADOS_CHOICES = (
         {"guardado","GUARDADO"},
@@ -36,6 +49,7 @@ class reservaForm(forms.ModelForm):
         input_formats=['%Y-%m-%d'],
         label='Fecha Nacimiento'
     )
+    
     def clean_nombre(self):
         nombre = self.cleaned_data.get('nombre')
         if len(nombre) <= 2:

@@ -1,4 +1,3 @@
-from collections.abc import Iterable
 from django.db import models
 import datetime
 
@@ -42,12 +41,13 @@ class Reserva(models.Model):
     imagenCarnet = models.ImageField(upload_to="carnets/")
     fchCreacion = models.DateTimeField(auto_now_add=True)
     fchModificacion = models.DateTimeField(auto_now=True)
-    # codigoQr = models.ImageField(upload_to='codigoqr/')
+    codigoQr = models.CharField(max_length=5000)
     
     def edad(self):
         hoy = datetime.datetime.now().date()
         nac = self.fchNacimiento
         edad = hoy.year - nac.year - ((hoy.month, hoy.day) < (nac.month, nac.day))
         return int(edad)
+    
     
     
